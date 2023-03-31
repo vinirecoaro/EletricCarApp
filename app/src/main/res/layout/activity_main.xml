@@ -5,178 +5,160 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".presentation.MainActivity">
 
     <TextView
         android:id="@+id/text_title"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/eletric_car"
-        android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_tab_cars"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/cars"
-        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_title" />
 
     <TextView
         android:id="@+id/text_tab_favorites"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:text="@string/favorites"
-        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/text_tab_cars"
         app:layout_constraintTop_toBottomOf="@id/text_title"
         app:layout_constraintTop_toTopOf="@id/text_tab_cars" />
 
-    <ImageView
-        android:id="@+id/image_car"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:src="@drawable/eletric_car"
+        app:cardBackgroundColor="@color/gray"
+        app:cardCornerRadius="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_tab_favorites" />
+        app:layout_constraintTop_toBottomOf="@id/text_tab_favorites">
 
-    <TextView
-        android:id="@+id/text_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/price"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_car" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_card_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_price_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:text="@string/price_value"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/text_power"
-        app:layout_constraintTop_toBottomOf="@id/image_car"
-        app:layout_constraintTop_toTopOf="@id/text_price" />
+            <ImageView
+                android:id="@+id/image_car"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/eletric_car"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_battery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/battery"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_price" />
+            <TextView
+                android:id="@+id/text_price"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_car" />
 
-    <TextView
-        android:id="@+id/text_battery_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:text="@string/battery_value"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/text_power"
-        app:layout_constraintTop_toBottomOf="@id/text_price" />
+            <TextView
+                android:id="@+id/text_price_value"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="@string/price_value"
+                app:layout_constraintStart_toEndOf="@id/text_power"
+                app:layout_constraintTop_toBottomOf="@id/image_car"
+                app:layout_constraintTop_toTopOf="@id/text_price" />
 
-    <TextView
-        android:id="@+id/text_power"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/power"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_battery" />
+            <TextView
+                android:id="@+id/text_battery"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/battery"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_price" />
 
-    <TextView
-        android:id="@+id/text_power_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:text="@string/power_value"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/text_power"
-        app:layout_constraintTop_toBottomOf="@id/text_battery" />
+            <TextView
+                android:id="@+id/text_battery_value"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="@string/battery_value"
+                app:layout_constraintStart_toEndOf="@id/text_power"
+                app:layout_constraintTop_toBottomOf="@id/text_price" />
 
-    <TextView
-        android:id="@+id/text_recharge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/recharge"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_power" />
+            <TextView
+                android:id="@+id/text_power"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/power"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_battery" />
 
-    <TextView
-        android:id="@+id/text_recharge_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:text="@string/recharge_value"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/text_power"
-        app:layout_constraintTop_toBottomOf="@id/text_power" />
+            <TextView
+                android:id="@+id/text_power_value"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="@string/power_value"
+                app:layout_constraintStart_toEndOf="@id/text_power"
+                app:layout_constraintTop_toBottomOf="@id/text_battery" />
 
-    <EditText
-        android:id="@+id/edit_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/preco_kwh"
-        android:inputType="numberDecimal"
-        android:maxLength="10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_recharge_value" />
+            <TextView
+                android:id="@+id/text_recharge"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="@string/recharge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_power" />
 
-    <EditText
-        android:id="@+id/edit_run_distance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/km_percorrido"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="4dp"
-        android:maxLength="10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_price" />
+            <TextView
+                android:id="@+id/text_recharge_value"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/recharge_value"
+                app:layout_constraintBottom_toBottomOf="@id/cl_card_content"
+                app:layout_constraintStart_toEndOf="@id/text_power"
+                app:layout_constraintTop_toBottomOf="@id/text_power" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button_calculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/calculate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_run_distance"
-        />
-
-    <TextView
-        android:id="@+id/text_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Resultado"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_calculate" />
-
-
-
-    
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

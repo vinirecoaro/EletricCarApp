@@ -1,16 +1,12 @@
-package com.example.eletriccarapp
+package com.example.eletriccarapp.presentation
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import android.widget.CheckBox
-import android.widget.CompoundButton
 import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Switch
 import android.widget.TextView
+import com.example.eletriccarapp.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,23 +24,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setupView(){
-        price = findViewById(R.id.edit_price)
         btnCalculate = findViewById(R.id.button_calculate)
-        kmPercorrido = findViewById(R.id.edit_run_distance)
-        resultado = findViewById(R.id.text_result)
     }
 
     fun setupListeners(){
         btnCalculate.setOnClickListener{
-            calculate()
+            startActivity(Intent(this, AutonomyCalculateActivity::class.java))
         }
-    }
-
-    fun calculate(){
-        val price = price.text.toString().toFloat()
-        val km = kmPercorrido.text.toString().toFloat()
-        val result = price/km
-        resultado.text = result.toString()
     }
 
 }
