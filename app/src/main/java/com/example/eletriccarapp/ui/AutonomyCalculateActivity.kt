@@ -1,5 +1,6 @@
 package com.example.eletriccarapp.ui
 
+import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +26,12 @@ class AutonomyCalculateActivity: AppCompatActivity() {
         setContentView(R.layout.acitivity_autonomy_calculate)
         setupView()
         setupListeners()
+        setupCachedResult()
+    }
+
+    private fun setupCachedResult() {
+        val calculatedValue = getSharedPref()
+        resultado.text = calculatedValue.toString()
     }
 
     fun setupView(){
@@ -49,6 +56,20 @@ class AutonomyCalculateActivity: AppCompatActivity() {
         val km = kmPercorrido.text.toString().toFloat()
         val result = price/km
         resultado.text = result.toString()
+        saveSharedPref(result)
+    }
+
+    fun saveSharedPref(result: Float){
+        val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()){
+            putFloat(getString(R.string.saved_calc), result)
+            apply()
+        }
+    }
+
+    fun getSharedPref(): Float{
+        val sharedPref = getPreferences(Context.MODE_PRIVATE)
+        return sharedPref.getFloat(getString(R.string.saved_calc), 0.0f)
     }
 
 }

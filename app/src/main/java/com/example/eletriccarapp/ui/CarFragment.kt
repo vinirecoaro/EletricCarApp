@@ -60,8 +60,8 @@ class CarFragment: Fragment() {
     override fun onResume() {
         super.onResume()
         if (checkForInternet(context)){
-        getAllCars()
-        //callService() //Outra forma de chamar serviço
+            getAllCars()
+            //callService() //Outra forma de chamar serviço
         }else{
             emptyState()
         }
@@ -114,10 +114,14 @@ class CarFragment: Fragment() {
     }
 
     fun setupList(list: List<Carro>){
-        val adapter = CarAdapter(carsArray)
+        val carAdapter = CarAdapter(list)
         carsList.visibility = View.VISIBLE
         carsList.layoutManager = LinearLayoutManager(context)
-        carsList.adapter = adapter
+        carsList.adapter = carAdapter
+
+        carAdapter.carItemListener = {carro ->
+            val bateria = carro.bateria
+        }
     }
 
     fun setupListeners(){
@@ -216,11 +220,12 @@ class CarFragment: Fragment() {
 
                     val model = Carro(
                         id = id,
-                        price = price,
-                        battery = battery,
-                        power = power,
-                        recharge = recharge,
-                        urlPhoto = urlPhoto
+                        preco = price,
+                        bateria = battery,
+                        potencia = power,
+                        recarga = recharge,
+                        urlPhoto = urlPhoto,
+                        isFavorite = false
                     )
                     carsArray.add(model)
                 }
