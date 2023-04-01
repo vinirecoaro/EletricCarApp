@@ -15,6 +15,7 @@
     <string name="km_percorrido">Km percorrido</string>
     <string name="calculate">Calcular</string>
     <string name="no_wifi">Ops, internet indisponível</string>
+    <string name="response_error">Algo deu errado, por favor tente novamente mais tarde</string>
     <string-array name="array_cities">
         <item>Araraquara</item>
         <item>Taquaritinga</item>
