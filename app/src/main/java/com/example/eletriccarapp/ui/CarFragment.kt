@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,7 @@ class CarFragment: Fragment() {
 
     lateinit var fabCalculate: FloatingActionButton
     lateinit var carsList: RecyclerView
+    lateinit var progress: ProgressBar
 
     var carsArray: ArrayList<Carro> = ArrayList()
 
@@ -37,20 +39,22 @@ class CarFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        callService()
         setupView(view)
         setupListeners()
+        callService()
     }
 
     fun setupView(view: View){
         view.apply{
             fabCalculate = findViewById(R.id.fab_calculate)
             carsList = findViewById(R.id.rv_cars)
+            progress = findViewById(R.id.pb_loader)
         }
     }
 
     fun setupList(){
         val adapter = CarAdapter(carsArray)
+        carsList.visibility = View.VISIBLE
         carsList.layoutManager = LinearLayoutManager(context)
         carsList.adapter = adapter
     }
@@ -71,6 +75,7 @@ class CarFragment: Fragment() {
         override fun onPreExecute() {
             super.onPreExecute()
             Log.d("MyTask", "Iniciando ...")
+            progress.visibility = View.VISIBLE
         }
 
         override fun doInBackground(vararg url: String?): String {
@@ -136,6 +141,7 @@ class CarFragment: Fragment() {
                     )
                     carsArray.add(model)
                 }
+                progress.visibility = View.GONE
                 setupList()
             }catch(e: Exception){
                 Log.e("Erro", e.message.toString())
