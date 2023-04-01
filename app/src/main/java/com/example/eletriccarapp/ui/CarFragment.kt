@@ -1,5 +1,6 @@
 package com.example.eletriccarapp.ui
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +25,8 @@ class CarFragment: Fragment() {
     lateinit var fabCalculate: FloatingActionButton
     lateinit var carsList: RecyclerView
 
+    var carsArray: ArrayList<Carro> = ArrayList()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,8 +37,8 @@ class CarFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        callService()
         setupView(view)
-        setupList(view)
         setupListeners()
     }
 
@@ -46,17 +49,21 @@ class CarFragment: Fragment() {
         }
     }
 
-    fun setupList(view: View){
-        val adapter = CarAdapter(CarFactory.list)
-        carsList.layoutManager = LinearLayoutManager(view.context)
+    fun setupList(){
+        val adapter = CarAdapter(carsArray)
+        carsList.layoutManager = LinearLayoutManager(context)
         carsList.adapter = adapter
     }
 
     fun setupListeners(){
         fabCalculate.setOnClickListener{
-        Mytask().execute("https://igorbag.github.io/cars-api/cars.json")
-        //startActivity(Intent(context, AutonomyCalculateActivity::class.java))
+        startActivity(Intent(context, AutonomyCalculateActivity::class.java))
         }
+    }
+
+    fun callService(){
+        val urlBase = "https://igorbag.github.io/cars-api/cars.json"
+        Mytask().execute(urlBase)
     }
 
     inner class Mytask: AsyncTask<String, String, String>(){
@@ -67,8 +74,7 @@ class CarFragment: Fragment() {
         }
 
         override fun doInBackground(vararg url: String?): String {
-            TODO("Not yet implemented")
-            val urlConnection: HttpURLConnection? = null
+            var urlConnection: HttpURLConnection? = null
             try{
                 val urlBase = URL(url[0])
                 urlConnection = urlBase.openConnection() as HttpURLConnection
@@ -82,7 +88,7 @@ class CarFragment: Fragment() {
             }finally {
                 urlConnection?.disconnect()
                 }
-            return ""
+            return " "
             }
 
         override fun onProgressUpdate(vararg values: String?) {
@@ -116,9 +122,10 @@ class CarFragment: Fragment() {
                         recharge = recharge,
                         urlPhoto = urlPhoto
                     )
+                    carsArray.add(model)
                     Log.d("Model -> ", model.toString())
                 }
-
+                setupList()
             }catch(e: Exception){
                 Log.e("Erro", e.message.toString())
             }
