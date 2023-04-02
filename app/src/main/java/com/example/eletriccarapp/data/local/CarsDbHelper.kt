@@ -10,15 +10,11 @@ class CarsDbHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, n
 
 
     override fun onCreate(db: SQLiteDatabase?) {
-        if (db != null) {
-            db.execSQL(TABLE_CAR)
-        }
+        db?.execSQL(TABLE_CAR)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        if (db != null) {
-            db.execSQL(SQL_DELETE_ENTRIES)
-        }
+        db?.execSQL(SQL_DELETE_ENTRIES)
         onCreate(db)
     }
 

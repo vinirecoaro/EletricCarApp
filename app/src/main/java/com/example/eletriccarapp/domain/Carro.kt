@@ -1,7 +1,7 @@
 package com.example.eletriccarapp.domain
 
 data class Carro(
-    val id: String,
+    val id: Int,
     val preco: String,
     val bateria: String,
     val potencia: String,

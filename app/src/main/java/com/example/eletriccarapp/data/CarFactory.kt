@@ -6,7 +6,7 @@ object CarFactory {
 
     val list = listOf<Carro>(
         Carro(
-            id = "1",
+            id = 1,
             preco = "R$ 300.000",
             bateria = "300 kWh",
             potencia = "200 cv",
@@ -15,7 +15,7 @@ object CarFactory {
             isFavorite = false
         ),
         Carro(
-            id = "1",
+            id = 1,
             preco = "R$ 250.000",
             bateria = "220 kWh",
             potencia = "250 cv",

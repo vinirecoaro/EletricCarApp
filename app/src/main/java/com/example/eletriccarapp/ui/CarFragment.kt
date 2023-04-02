@@ -1,6 +1,5 @@
 package com.example.eletriccarapp.ui
 
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -20,16 +19,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eletriccarapp.R
-import com.example.eletriccarapp.data.CarFactory
 import com.example.eletriccarapp.data.CarsApi
-import com.example.eletriccarapp.data.local.CarrosContract
-import com.example.eletriccarapp.data.local.CarrosContract.CarEntry.COLUMN_NAME_BATERIA
-import com.example.eletriccarapp.data.local.CarrosContract.CarEntry.COLUMN_NAME_POTENCIA
-import com.example.eletriccarapp.data.local.CarrosContract.CarEntry.COLUMN_NAME_PRECO
-import com.example.eletriccarapp.data.local.CarrosContract.CarEntry.COLUMN_NAME_RECARGA
-import com.example.eletriccarapp.data.local.CarrosContract.CarEntry.COLUMN_NAME_URL_PHOTO
-import com.example.eletriccarapp.data.local.CarrosContract.CarEntry.TABLE_NAME
-import com.example.eletriccarapp.data.local.CarsDbHelper
+import com.example.eletriccarapp.data.local.CarRepository
 import com.example.eletriccarapp.domain.Carro
 import com.example.eletriccarapp.ui.adapter.CarAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -129,7 +120,7 @@ class CarFragment: Fragment() {
         carsList.adapter = carAdapter
 
         carAdapter.carItemListener = {carro ->
-            val bateria = carro.bateria
+            val isSaved = CarRepository(requireContext()).saveIfNotExist(carro)
         }
     }
 
@@ -228,7 +219,7 @@ class CarFragment: Fragment() {
                     Log.d("IDDD -> ", urlPhoto)
 
                     val model = Carro(
-                        id = id,
+                        id = id.toInt(),
                         preco = price,
                         bateria = battery,
                         potencia = power,
@@ -248,17 +239,6 @@ class CarFragment: Fragment() {
         }
     }
 
-    fun saveOnDatabase(carro: Carro){
-        val dbHelper = CarsDbHelper(requireContext())
-        val db = dbHelper.writableDatabase
-        val values = ContentValues().apply {
-            put(COLUMN_NAME_PRECO, carro.preco)
-            put(COLUMN_NAME_BATERIA, carro.bateria)
-            put(COLUMN_NAME_POTENCIA, carro.potencia)
-            put(COLUMN_NAME_RECARGA, carro.recarga)
-            put(COLUMN_NAME_URL_PHOTO, carro.urlPhoto)
-        }
-        val newRegister = db?.insert(TABLE_NAME, null, values)
-    }
+
 
 }
