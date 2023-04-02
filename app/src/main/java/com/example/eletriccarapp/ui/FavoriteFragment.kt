@@ -39,13 +39,13 @@ class FavoriteFragment: Fragment() {
 
     fun setupList(){
         val cars = getCarsOnLocalDb()
-        val carAdapter = CarAdapter(cars)
+        val carAdapter = CarAdapter(cars, isFavoriteScreen = true)
         favoriteCarsList.visibility = View.VISIBLE
         favoriteCarsList.layoutManager = LinearLayoutManager(context)
         favoriteCarsList.adapter = carAdapter
 
         carAdapter.carItemListener = {carro ->
-            //val isSaved = CarRepository(requireContext()).saveIfNotExist(carro)
+            TODO("DELETAR CARRO DOS FAVORITOS")
         }
     }
 
