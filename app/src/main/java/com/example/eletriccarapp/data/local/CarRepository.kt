@@ -38,6 +38,23 @@ class CarRepository(private val context: Context) {
         return isSaved
     }
 
+    fun delete(id: Int):Boolean{
+        val dbHelper = CarsDbHelper(context)
+        val db = dbHelper.writableDatabase
+        var isDeleted = false
+        try{
+            val selection = "${CarrosContract.CarEntry.COLUMN_NAME_CAR_ID} LIKE ?"
+            val selectionArgs = arrayOf(id.toString())
+            val deleteRows = db?.delete(CarrosContract.CarEntry.TABLE_NAME, selection, selectionArgs)
+            if(deleteRows != null){
+                isDeleted = true
+            }
+        }catch (e: java.lang.Exception){
+            e.message?.let{Log.e("Erro ao deletar -> ", it)}
+        }
+        return isDeleted
+    }
+
     fun findCarById(id: Int): Carro{
         val dbHelper = CarsDbHelper(context)
         val db = dbHelper.readableDatabase
