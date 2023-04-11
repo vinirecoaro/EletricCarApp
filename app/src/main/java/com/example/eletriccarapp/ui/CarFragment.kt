@@ -33,7 +33,6 @@ import java.net.URL
 
 class CarFragment: Fragment() {
 
-    lateinit var fabCalculate: FloatingActionButton
     lateinit var carsList: RecyclerView
     lateinit var progress: ProgressBar
     lateinit var noInternetImage: ImageView
@@ -54,7 +53,6 @@ class CarFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRetrofit()
         setupView(view)
-        setupListeners()
     }
 
     override fun onResume() {
@@ -105,7 +103,6 @@ class CarFragment: Fragment() {
 
     fun setupView(view: View){
         view.apply{
-            fabCalculate = findViewById(R.id.fab_calculate)
             carsList = findViewById(R.id.rv_cars)
             progress = findViewById(R.id.pb_loader)
             noInternetImage = findViewById(R.id.image_empty_state)
@@ -121,12 +118,6 @@ class CarFragment: Fragment() {
 
         carAdapter.carItemListener = {carro ->
             val isSaved = CarRepository(requireContext()).saveIfNotExist(carro)
-        }
-    }
-
-    fun setupListeners(){
-        fabCalculate.setOnClickListener{
-        startActivity(Intent(context, AutonomyCalculateActivity::class.java))
         }
     }
 

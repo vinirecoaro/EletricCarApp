@@ -17,7 +17,6 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             >
 
             <intent-filter>
@@ -26,10 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.AutonomyCalculateActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
+        <activity android:name=".ui.AutonomyCalculateActivity" />
     </application>
 
 </manifest>
